@@ -8,10 +8,18 @@ using System.Diagnostics;
 
 namespace ConsoleApp1
 {
+    public interface INameAndCopy
+    {
+        string name { get; set; }
+        object DeepCopy();
+    }
+
     class Program
     {
+
+
         static void Main(string[] args)
-        {
+        {            
             ResearchTeam team1 = new ResearchTeam();        //p.1
             Console.WriteLine(Convert.ToString(team1.Indexator(TimeFrame.Year) + " " + team1.Indexator(TimeFrame.TwoYears) + " " + team1.Indexator(TimeFrame.Long))); //p.2
             team1.SetResearchName("Research1");
@@ -197,7 +205,7 @@ namespace ConsoleApp1
             return PublicationName + " " + person + " " + date;
         }
     }
-    public class ResearchTeam : Team
+    public class ResearchTeam
     {
         string researchName;
         string orgName;
@@ -223,7 +231,6 @@ namespace ConsoleApp1
                     return PublicationList.First(x => x.date == PublicationList.Max(y => y.date));
                 }
                 return null;
-                //    return PublicationList.Last();
             }
          }
         public bool Indexator(TimeFrame time)
