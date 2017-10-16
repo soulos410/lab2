@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Team : INameAndCopy
+    public class Team : INameAndCopy
     {
         public string name
         {
@@ -33,12 +33,12 @@ namespace ConsoleApp1
             registrationNumber = 1;
         }
 
-        public string organizationGetSet
+        public string OrganizationGetSet
         {
             get{ return organizationName; }
             set { organizationName = value;}
         }
-        public int registrationGetSet
+        public int RegistrationGetSet
         {
             get
             {
@@ -66,11 +66,11 @@ namespace ConsoleApp1
             }
             return this.ToString() == obj.ToString();
         }
-        public virtual int GetHashCode()
+        public override int GetHashCode()
         {
             return this.ToString().GetHashCode();
         }
-        public virtual string ToString()
+        public override string ToString()
         {
             return String.Format("Organization name: {0} , Registration number: {1}", organizationName,registrationNumber); 
         }

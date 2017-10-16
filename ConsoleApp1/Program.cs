@@ -16,8 +16,6 @@ namespace ConsoleApp1
 
     class Program
     {
-
-
         static void Main(string[] args)
         {            
             ResearchTeam team1 = new ResearchTeam();        //p.1
@@ -34,8 +32,7 @@ namespace ConsoleApp1
             team1.AddPapers(pub,pub2);            
             Console.WriteLine("last paper is :  " + team1.LastPaper.ToString());         //p.5
             Console.WriteLine("Введите размерность двумерного массива: (кол-во строк/кол-во столбцов. Используя символы // и __ как разделители)");
-            string countOfElements = Console.ReadLine();
-            
+            string countOfElements = Console.ReadLine();            
 
             Console.WriteLine("\n You entered : {0}", countOfElements);
             
@@ -52,9 +49,9 @@ namespace ConsoleApp1
             Paper[][] stupArray = new Paper[rows][];
 
             TimeSpan firstArray, secondArray, thirdArray;
+            
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-
             for (int i = 0; i < oneRowArray.Length; i++)
             {
                 oneRowArray[i] = new Paper();
@@ -203,112 +200,6 @@ namespace ConsoleApp1
         public override string ToString()
         {
             return PublicationName + " " + person + " " + date;
-        }
-    }
-    public class ResearchTeam
-    {
-        string researchName;
-        string orgName;
-        int registrationNumber;
-        TimeFrame researchTime;
-        public Paper[] PublicationList;
-
-        public void SetPublicationList(Paper[] list)
-        {
-            foreach (Paper p in list)
-            {
-                int index = 0;
-                PublicationList[index] = p;
-                index++;
-            }            
-        }
-        public Paper LastPaper
-        {
-            get
-            {
-                if(PublicationList.Length > 0)
-                {
-                    return PublicationList.First(x => x.date == PublicationList.Max(y => y.date));
-                }
-                return null;
-            }
-         }
-        public bool Indexator(TimeFrame time)
-        {
-            if (researchTime == time) return true;
-            return false;
-        }
-
-        public void AddPapers(params Paper[] papers)
-        {
-            SetPublicationList(papers);
-        }
-        public override string ToString()
-        {
-            string papers = "";
-            foreach(Paper paper in PublicationList)
-            {
-                papers += paper;
-            }
-            return ToShortString() + " " + papers;
-        }
-        public string ToShortString()
-        {
-            return researchName + " " + orgName + " " + registrationNumber + " " + researchTime;
-        }
-
-        public ResearchTeam( string researchName, string orgName, int registrationNumber, TimeFrame researchTime, Paper[] publicationList)
-        {
-            this.researchName = researchName;
-            this.orgName = orgName;
-            this.registrationNumber = registrationNumber;
-            this.researchTime = researchTime;
-            this.PublicationList = publicationList;
-        }
-        public ResearchTeam()
-        {
-            researchName = "Hello World";
-            orgName = "BSUIR";
-            registrationNumber = 1;
-            researchTime = TimeFrame.Year;
-            PublicationList = new Paper[1];
-        }
-
-        public void SetResearchName(string researchName)
-        {
-            this.researchName = researchName;
-        }
-        public string GetResearchName()
-        {
-            return researchName;
-        }
-
-        public void SetOrgName(string orgName)
-        {
-            this.orgName = orgName;
-        }
-        public string GetOrgName()
-        {
-            return orgName;
-        }
-
-        public void SetRegistrationNumber(int registrationNumber)
-        {
-            this.registrationNumber = registrationNumber;
-        }
-        public int GetRegistrationNumber()
-        {
-            return registrationNumber;
-        }
-
-        public void SetTimeFrame(TimeFrame researchTime)
-        {
-            this.researchTime = researchTime;
-        }
-
-        public TimeFrame GetTimeFrame()
-        {
-            return researchTime;
         }
     }
 
