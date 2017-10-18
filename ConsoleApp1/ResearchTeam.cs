@@ -85,16 +85,16 @@ namespace ConsoleApp1
 
         public override object DeepCopy()
         {
-              object rt = new ResearchTeam (this.researchName,this.organizationName, base.name, base.registrationNumber, this.researchTime);
+              object copy = new ResearchTeam (this.researchName,this.organizationName, base.registrationNumber, this.researchTime);
               foreach(Paper p in this.listOfPublications)
               {
-                  ((ResearchTeam) rt).AddPapers((Paper)(p.DeepCopy()));
+                  ((ResearchTeam)copy).AddPapers((Paper)(p.DeepCopy()));
               }
-              foreach (Person p in this.ListOfMembers)
+              foreach (Person p in this.listOfPersons)
               {
-                 ((ResearchTeam)rt).AddMembers((Person)(p.DeepCopy()));
+                 ((ResearchTeam)copy).AddPersons((Person)(p.DeepCopy()));
               }
-              return rt;
+              return copy;
         }
 
     public ResearchTeam( string researchName,string organization ,int regNumber, TimeFrame researchTime) : base(organization,regNumber)
@@ -139,6 +139,30 @@ namespace ConsoleApp1
         public TimeFrame GetTimeFrame()
         {
             return researchTime;
+        }
+        public IEnumerable PersonsWithoutPublications()
+        {
+            foreach (Person persons in listOfPersons)
+            {
+                foreach (Paper papers in listOfPublications)
+                {
+                    if (persons.ToShortString() != papers.person.ToShortString()) 
+                    {
+                        yield return persons;
+                    }
+                }
+            }
+        }
+
+        public IEnumerable GetPubliscationsByYear(int year)
+        {
+            foreach (Paper paper in listOfPublications)
+            {
+               if (paper.date.Year <= year)
+               {
+                   yield return paper;
+               }
+            }
         }
     }
 }
