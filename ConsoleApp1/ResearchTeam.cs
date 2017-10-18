@@ -65,12 +65,39 @@ namespace ConsoleApp1
         {
             this.listOfPersons.AddRange(persons);
         }
+        public string ToString()
+        {
+            string papers = "", teamMembers = ""; 
+            for(int i = 0; i < listOfPersons.Count; i++)
+            {
+                papers += Convert.ToString(listOfPersons[i] + "\n");
+            }
+            for(int i = 0; i < listOfPublications.Count; i++)
+            {
+                teamMembers += Convert.ToString(listOfPublications[i] + "\n");
+            }
+            return researchName + " " + organizationName + " " + registrationNumber + " " + researchTime + " " + papers + " " + teamMembers;
+        }
         public string ToShortString()
         {
-            return researchName + " " + organizationName + registrationNumber + " " + researchTime;
+            return researchName + " " + organizationName + " " + registrationNumber + " " + researchTime;
         }
 
-        public ResearchTeam( string researchName,string organization ,int regNumber, TimeFrame researchTime) : base(organization,regNumber)
+        public override object DeepCopy()
+        {
+              object rt = new ResearchTeam (this.researchName,this.organizationName, base.name, base.registrationNumber, this.researchTime);
+              foreach(Paper p in this.listOfPublications)
+              {
+                  ((ResearchTeam) rt).AddPapers((Paper)(p.DeepCopy()));
+              }
+              foreach (Person p in this.ListOfMembers)
+              {
+                 ((ResearchTeam)rt).AddMembers((Person)(p.DeepCopy()));
+              }
+              return rt;
+        }
+
+    public ResearchTeam( string researchName,string organization ,int regNumber, TimeFrame researchTime) : base(organization,regNumber)
         {
             this.researchName = researchName;
             this.registrationNumber = regNumber;
