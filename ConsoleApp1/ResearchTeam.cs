@@ -46,12 +46,12 @@ namespace ConsoleApp1
                     DateTime max = DateTime.MinValue;
                     foreach (Paper paper in listOfPublications)
                     {
-                        if(paper.date > max)
+                        if(paper.Date > max)
                         {
-                            max = paper.date;
+                            max = paper.Date;
                         }
                         var answer = ((Paper[])listOfPublications.ToArray()).ToList();
-                        return answer.Find(i => i.date == max);
+                        return answer.Find(i => i.Date == max);
                     }
                 }
                 return null;
@@ -110,7 +110,6 @@ namespace ConsoleApp1
             researchName = "Default research name";
             researchTime = TimeFrame.Year;
             listOfPublications = new ArrayList() { new Paper() };
-            listOfPersons = new ArrayList() { new Person() };
         }
 
         public void SetResearchName(string researchName)
@@ -140,13 +139,15 @@ namespace ConsoleApp1
         {
             return researchTime;
         }
+
+
         public IEnumerable PersonsWithoutPublications()
         {
-            foreach (Person persons in listOfPersons)
+            foreach (Paper papers in listOfPublications)
             {
-                foreach (Paper papers in listOfPublications)
+                foreach (Person persons in listOfPersons)
                 {
-                    if (persons.ToShortString() != papers.person.ToShortString()) 
+                    if (persons.ToShortString() != papers.Author.ToShortString())
                     {
                         yield return persons;
                     }
@@ -154,14 +155,36 @@ namespace ConsoleApp1
             }
         }
 
+        /*        public IEnumerable PersonsWithoutPublications()
+                {
+                    foreach (Paper papers in listOfPublications)
+                    {
+                        foreach (Person persons in listOfPersons)
+                        {
+                            if (persons.ToShortString() != papers.Author.ToShortString()) 
+                            {
+                                yield return persons;
+                            }
+                        }
+                    }
+                } */
+
         public IEnumerable GetPubliscationsByYear(int year)
         {
-            foreach (Paper paper in listOfPublications)
+            int searchingDate = DateTime.Now.Year - year;
+            foreach (Paper paper in this.listOfPublications)
             {
-               if (paper.date.Year <= year)
+               if (paper.Date.Year >= searchingDate && paper.Date.Year < DateTime.Now.Year)
                {
                    yield return paper;
                }
+            }
+        }
+        public Team GetTeam
+        {
+            get
+            {
+                return new Team(organizationName, registrationNumber);
             }
         }
     }
