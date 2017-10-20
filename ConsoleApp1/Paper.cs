@@ -32,7 +32,7 @@ namespace ConsoleApp1
         }
         public object DeepCopy()
         {
-            object paper = new Person();
+            object paper = new Paper();
             ((Paper)paper).PublicationName = this.PublicationName;
             ((Paper)paper).Author = this.Author;
             ((Paper)paper).Date = this.Date;

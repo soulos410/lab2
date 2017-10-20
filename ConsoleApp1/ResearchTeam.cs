@@ -154,21 +154,7 @@ namespace ConsoleApp1
                 }
             }
         }
-
-        /*        public IEnumerable PersonsWithoutPublications()
-                {
-                    foreach (Paper papers in listOfPublications)
-                    {
-                        foreach (Person persons in listOfPersons)
-                        {
-                            if (persons.ToShortString() != papers.Author.ToShortString()) 
-                            {
-                                yield return persons;
-                            }
-                        }
-                    }
-                } */
-
+        
         public IEnumerable GetPubliscationsByYear(int year)
         {
             int searchingDate = DateTime.Now.Year - year;
@@ -185,6 +171,17 @@ namespace ConsoleApp1
             get
             {
                 return new Team(organizationName, registrationNumber);
+            }
+        }
+        public string ResearchName
+        {
+            get
+            {
+                return researchName;
+            }
+            set
+            {
+                new Paper();
             }
         }
     }

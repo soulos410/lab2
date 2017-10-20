@@ -46,22 +46,19 @@ namespace ConsoleApp1
             // 4th task
             Console.WriteLine(resTeam.GetTeam);
             // 5th task
-
+            ResearchTeam resTeam2 = resTeam.DeepCopy() as ResearchTeam;
+            resTeam.ResearchName = "Math";
+            resTeam2.AddPersons(new Person("Ser", "Gay", new DateTime(2000, 6, 1)));
+            Console.WriteLine(resTeam.ToString());
+            Console.WriteLine();
+            Console.WriteLine(resTeam2.ToString());
+            Console.WriteLine();
 
 
             // 6 task 
-            Console.WriteLine("TASK 6");
-            resTeam.AddPapers(new Paper("NameOfPub", new Person("Sergey", "Denis", new DateTime(2013, 10, 10)), new DateTime(2000, 01, 10)));
+            Console.WriteLine("\n   Persons without publications:");
             resTeam.AddPersons(new Person("Sereja", "Oleja",new DateTime(2015,03,10)));
 
-            foreach(Person p in resTeam.personsList)
-            {
-                Console.WriteLine("This is the person : \n" + p + " \n");
-            }
-            foreach(Paper pap in resTeam.publicationsList)
-            {
-                Console.WriteLine("This is the Publication : \n" + pap + "\n");
-            }
             foreach (Person person in resTeam.PersonsWithoutPublications())
             {
                 Console.WriteLine("\n" + person);
