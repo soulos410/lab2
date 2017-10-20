@@ -9,34 +9,33 @@ namespace ConsoleApp1
     public class Paper
     {
         public string PublicationName { get; set; }
-        public Person person { get; set; }
-        public DateTime date { get; set; }
+        public Person Author { get; set; }
+        public DateTime Date { get; set; }
 
-        public Paper(string PublName, Person person, DateTime defDate)
+        public Paper(string PublName, Person pers, DateTime defDate)
         {
             PublicationName = PublName;
-            this.person = person;
-            date = defDate;
+            Author = pers;
+            Date = defDate;
         }
 
         public Paper()
         {
-            PublicationName = "Hey";
-            Person defaultPerson = new Person();
-            defaultPerson.SetAuthor("Denis", "Karneev");
-            DateTime defaultDate = new DateTime(2008, 08, 12);
+            PublicationName = "PubName";
+            Author = new Person("Fml", "BlessRng",new DateTime(2010,01,01));
+            Date = new DateTime(2014, 08, 12);
         }
 
         public override string ToString()
         {
-            return PublicationName + " " + person + " " + date;
+            return PublicationName + " " + Author + " " + Date;
         }
         public object DeepCopy()
         {
-            object paper = new Person();
+            object paper = new Paper();
             ((Paper)paper).PublicationName = this.PublicationName;
-            ((Paper)paper).person = this.person;
-            ((Paper)paper).date = this.date;
+            ((Paper)paper).Author = this.Author;
+            ((Paper)paper).Date = this.Date;
             return paper;
         }
     }

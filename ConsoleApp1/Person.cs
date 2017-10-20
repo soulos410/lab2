@@ -4,60 +4,60 @@ namespace ConsoleApp1
 {
     public class Person
     {
-        string name { get; set; }
-        string surname { get; set; }
-        DateTime birthDate { get; set; }
-        int date;
+        string Name { get; set; }
+        string Surname { get; set; }
+        DateTime BirthDate { get; set; }
+
         
         int GetYear(DateTime birthDate)
         {
-            return this.birthDate.Year;
+            return this.BirthDate.Year;
         }
-        DateTime SetYear(DateTime birthDate, int newDate)
+        DateTime SetYear(DateTime BirthDate, int newDate)
         {
-            return this.birthDate.AddYears(newDate - birthDate.Year);
+            return this.BirthDate.AddYears(newDate - BirthDate.Year);
         }
         public Person()
         {
-            string name = "Denis";
-            string surname = "Karneev";
-            DateTime date = new DateTime(2003,08,17);
+            this.Name = "Denis";
+            this.Surname = "Karneev";
+            this.BirthDate = new DateTime(2003,08,17);
         }
         public Person(string name, string surname, DateTime date)
         {
-            this.name = name;
-            this.surname = surname;
-            birthDate = date;
+            Name = name;
+            Surname = surname;
+            BirthDate = date;
         }
         public override string ToString()
         {
-            return name + " " + surname + " " + birthDate + " " + date;
+            return Name + " " + Surname + " " + BirthDate + " ";
         }
         public virtual string ToShortString()
         {
-            return name + " " + surname;
+            return Name + " " + Surname;
         }
         public void SetAuthor(string name, string surname)
         {
-            this.name = name;
-            this.surname = surname;
+            Name = name;
+            Surname = surname;
         }
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType()) return false;
             Person personEqu = (Person)obj;
-            return name.Equals(personEqu.name) && surname.Equals(personEqu.surname) && date.Equals(personEqu.birthDate); 
+            return Name.Equals(personEqu.Name) && Surname.Equals(personEqu.Surname); 
         }
         public override int GetHashCode()
         {
-            return name.GetHashCode() ^ surname.GetHashCode() ^ birthDate.GetHashCode();
+            return Name.GetHashCode() ^ Surname.GetHashCode() ^ BirthDate.GetHashCode();
         }
         public object DeepCopy()
         {
             object person = new Person();
-            ((Person)person).birthDate = this.birthDate;
-            ((Person)person).name = this.name;
-            ((Person)person).surname = this.surname;
+            ((Person)person).BirthDate = this.BirthDate;
+            ((Person)person).Name = this.Name;
+            ((Person)person).Surname = this.Surname;
             return person;
         }
     }
